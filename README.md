@@ -7,7 +7,7 @@
 - [x] Tidy up build process
 - [x] Set up Database
 - [x] Attach Database to UI
-- [ ] Add Authentication (w/ clerk)
+- [x] Add Authentication (w/ clerk)
 - [ ] Add Image upload
 - [ ] Error management (w/ sentry)
 - [ ] Routing/image page (parallel route)
