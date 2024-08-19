@@ -7,7 +7,7 @@ import { type Metadata } from "next";
 import { TopNav } from "./_components/topnav";
 
 export const metadata: Metadata = {
-  title: "Thomas-Gallery",
+  title: "ThomGallery",
   description: "Upload your images here hihi",
   icons: [{ rel: "icon", url: "/favicon.svg" }], // TODO Might not work
 };
