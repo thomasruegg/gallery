@@ -3,6 +3,8 @@ import Link from "next/link";
 import { mock } from "node:test";
 import { db } from "~/server/db";
 
+export const dynamic = "force-dynamic";
+
 const mockUrls = [
   "https://placehold.co/800?text=Thomas&font=roboto",
   "https://placehold.co/800?text=Liz&font=roboto",
@@ -16,7 +18,7 @@ const mockImages = mockUrls.map((url, index) => ({
 }));
 
 export default async function HomePage() {
-
+  
   const posts = await db.query.posts.findMany();
 
   return (
