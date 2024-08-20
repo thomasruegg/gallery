@@ -1,7 +1,5 @@
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
-import { index } from "drizzle-orm/mysql-core";
-import Link from "next/link";
-import { mock } from "node:test";
+import Image from "next/image";
 import { getMyImages } from "../server/queries";
 
 export const dynamic = "force-dynamic";
@@ -9,10 +7,16 @@ export const dynamic = "force-dynamic";
 async function Images() {
   const images = await getMyImages();
 
-  return <div className="flex flex-wrap gap-4">
+  return <div className="flex flex-wrap justify-center gap-4">
     {images.map((image) => (
-      <div key={image.id} className="w-48 flex flex-col">
-        <img src={image.url} />
+      <div key={image.id} className="w-48 h-48 flex flex-col">
+        <Image
+          src={image.url}
+          style={{ objectFit: "contain" }}
+          alt={image.name}
+          width={480}
+          height={480}
+        />
         <div className="">{image.name}</div>
       </div>
     ))}
