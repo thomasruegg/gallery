@@ -2,12 +2,24 @@ import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { index } from "drizzle-orm/mysql-core";
 import Link from "next/link";
 import { mock } from "node:test";
-import { db } from "~/server/db";
+import { getMyImages } from "../server/queries";
 
 export const dynamic = "force-dynamic";
 
-export default async function HomePage() {
+async function Images() {
+  const images = await getMyImages();
 
+  return <div className="flex flex-wrap gap-4">
+    {images.map((image) => (
+      <div key={image.id} className="w-48 flex flex-col">
+        <img src={image.url} />
+        <div className="">{image.name}</div>
+      </div>
+    ))}
+  </div>;
+}
+
+export default async function HomePage() {
   return (
     <main className="">
 
@@ -23,19 +35,5 @@ export default async function HomePage() {
 
     </main>
   );
-}
-async function Images() {
-  const images = await db.query.images.findMany({
-    orderBy: (model, { desc }) => desc(model.id),
-  });
-
-  return <div className="flex flex-wrap gap-4">
-    {images.map((image) => (
-      <div key={image.id} className="w-48 flex flex-col">
-        <img src={image.url} />
-        <div className="">{image.name}</div>
-      </div>
-    ))}
-  </div>;
 }
 
