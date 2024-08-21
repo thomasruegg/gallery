@@ -8,7 +8,7 @@ import { TopNav } from "./_components/topnav";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
-import { Toaster } from "sonner";
+import { Toaster } from "~/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "ThomGallery",
