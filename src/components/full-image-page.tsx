@@ -4,7 +4,7 @@ import { getImage } from "~/server/queries";
 export default async function FullPageImageView(props: { id: number }) {
     const image = await getImage(props.id);
 
-    const uploaderInfo = await clerkClient.users.getUser(image.userId);
+    const uploaderInfo = await clerkClient().users.getUser(image.userId);
 
     return (
         <div className="flex w-full min-w-0 h-full ">
