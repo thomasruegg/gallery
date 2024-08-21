@@ -12,12 +12,16 @@ import { ourFileRouter } from "./api/uploadthing/core";
 export const metadata: Metadata = {
   title: "ThomGallery",
   description: "Upload your images here hihi",
-  icons: [{ rel: "icon", url: "/favicon.svg" }], // TODO Might not work
+  icons: [{ rel: "icon", url: "/favicon.svg" }],
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+  modal,
+}: {
+  children: React.ReactNode;
+  modal: React.ReactNode
+}) {
   return (
     <ClerkProvider>
       <html lang="en">
@@ -33,6 +37,8 @@ export default function RootLayout({
         <body className={`font-sans ${GeistSans.variable} flex flex-col gap-4`}>
           <TopNav />
           {children}
+          {modal}
+          <div id="modal-root"></div>
         </body>
       </html>
     </ClerkProvider>
