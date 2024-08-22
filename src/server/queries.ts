@@ -5,6 +5,7 @@ import { images } from "./db/schema";
 import { redirect } from "next/navigation";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import analyticsServerClient from "./analytics";
 
 export async function getMyImages() {
 
@@ -47,6 +48,14 @@ export async function deleteImage(id: number) {
                 eq(images.userId, user.userId) // only delete if the current user owns it
             )
         );
+
+    analyticsServerClient.capture({
+        distinctId: user.userId,
+        event: "delete image",
+        properties: {
+            imageId: id,
+        },
+    })
 
     redirect('/');
 }
