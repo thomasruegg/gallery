@@ -4,6 +4,8 @@ A simple full-stack gallery app built with Next.js, Clerk, UploadThing, and more
 
 Check it out here: https://gallery-two-roan.vercel.app
 
+![demo-screenshot](demo-screenshot.png)
+
 ## Technologies Used
 
 - **[Next.js](https://nextjs.org/):** React Framework by Vercel. It powers the entire application, enabling server-side rendering, static site generation, and client-side routing.
