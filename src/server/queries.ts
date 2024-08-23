@@ -4,11 +4,20 @@ import { auth } from "@clerk/nextjs/server";
 import { images } from "./db/schema";
 import { redirect } from "next/navigation";
 import { and, eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
 import analyticsServerClient from "./analytics";
+import { UTApi } from "uploadthing/server";
+
+const utapi = new UTApi();
+
+export const deleteUTFiles = async (files: string[]) => {
+    try {
+      await utapi.deleteFiles(files);
+    } catch (error) {
+      console.error("UploadThingAPI: Error deleting files", error);
+    }
+  };
 
 export async function getMyImages() {
-
     const user = auth();
 
     if (!user.userId) {
@@ -40,6 +49,11 @@ export async function deleteImage(id: number) {
     const user = auth();
     if (!user.userId) throw new Error("Unauthorized");
 
+    const image = await getImage(id);
+    if (!image) throw new Error("Image was not found using getImage(id)");
+
+    await deleteUTFiles([`${extractFileIdFromUrl(image.url)}`]);
+    
     await db
         .delete(images)
         .where(
@@ -48,7 +62,7 @@ export async function deleteImage(id: number) {
                 eq(images.userId, user.userId) // only delete if the current user owns it
             )
         );
-
+        
     analyticsServerClient.capture({
         distinctId: user.userId,
         event: "delete image",
@@ -58,4 +72,11 @@ export async function deleteImage(id: number) {
     })
 
     redirect('/');
+}
+
+function extractFileIdFromUrl(url: string) {
+    const urlObj = new URL(url);
+    const pathSegments = urlObj.pathname.split('/');
+
+    return pathSegments[pathSegments.length - 1];
 }
