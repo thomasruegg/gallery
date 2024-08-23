@@ -12,11 +12,12 @@ Check it out here: https://gallery-two-roan.vercel.app
   - **Parallel Routes:** For handling modal prompts, allowing for non-blocking UI interactions. E.g. clicking on an image will open the image as a modal, but the url will change. This allows users to save a link to the image itself.
   - **Server Components:** Leveraged for implementing server-side logic (such as handling delete actions directly on the server).
   - **Image Component:** For efficient image rescaling (optimizes thumbnails).
+- **[Clerk](https://clerk.com):** Authentication solution that handles user sign-up, login, and session management.
+- **[Drizzle](https://orm.drizzle.team):** Modern, performant but lightweight TypeScript ORM.
 - **[Uploadthing](https://uploadthing.com/):** For image storage. Provides a simple interface for uploading and managing images in the gallery.
 - **[Vercel](https://vercel.com/):** For deployment.
   - **Vercel Postgres:** Database solution powering e.g. the back-end, storing user data, and images.
 - **[ShadUI](https://ui.shadcn.com):** UI component library
-- **[Clerk](https://clerk.com):** Authentication solution that handles user sign-up, login, and session management.
 - **[PostHog](https://posthog.com/):** Analytics platform used to track user behavior within the app.
 - **[Sentry](https://sentry.io/):** For error management and monitoring (faster troubleshooting and bug fixes).
 - **[Upstash](https://upstash.com/):** For rate limiting server actions, ensuring the app remains responsive and secure.
